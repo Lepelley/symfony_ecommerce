@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Liste des commandes passés
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Liste des commandes passés</h1>
+        {% for basket in baskets %}
+            <h2>Commande {{ basket.id }}, prix : {{ basket.price }}€</h2>
+            <ul>
+                {% for order in basket.orders %}
+                    <li>{{ order.product.name }}, prix à l'unité : {{ order.product.price}} (quantité : {{ order.quantity }})</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+
+        {% if baskets | length < 1 %}
+        <p>Panier vide</p>
+        {% endif %}
+    </div>
+{% endblock %}

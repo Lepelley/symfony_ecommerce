@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}symCommerce{% endblock %}
+
+{% block body %}
+    <div class="row my-4">
+        <div class="col">
+            <h1 class="mb-4">Categories</h1>
+            <p>
+                {% for category in categories %}
+                <a href="{{ path('category_show', {slug: category.slug}) }}" class="btn btn-primary">
+                    {{ category.name }} <span class="badge badge-light">{{ category.products | length }}</span>
+                </a>
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+    <div class="row my-4">
+        <div class="col">
+            <h1>Besoin d'idée</h1>
+            <div class="row">
+                {% for product in products %}
+                <div class="col-sm-4">
+                    <h2>{{ product.name }}</h2>
+                    <img src="{{ asset('uploads/pictures/' ~ product.picture) }}" class="img-fluid" alt="">
+                    <p class="h5 my-2">{{ product.price }}€</p>
+                    <p>
+                        <a href="{{ path('product_show', {slug: product.category.slug, slugProduct: product.slugProduct}) }}"
+                           class="btn btn-primary">
+                            Voir
+                        </a>
+                        <a href="{{ path('basket_add', {id: product.id}) }}" class="btn btn-success">
+                            Ajouter au panier
+                        </a>
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

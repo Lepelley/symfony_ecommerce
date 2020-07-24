@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Résultats de la recherche</h1>
+    <ul>
+        {% for product in products %}
+            <li>
+                <a href="{{ path('product_show', {slug: product.category.slug, slugProduct: product.slugProduct}) }}">
+                    {{ product.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block title %}
+    Recherche
+{% endblock %}
+

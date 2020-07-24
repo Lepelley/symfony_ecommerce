@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Membre{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <p>{{ member.id }}</p>
+
+        <p><img src="{{ member.picture }}" alt="Avatar de {{ member.firstName }}"></p>
+
+        <p>FIRST NAME : {{ member.firstName }}</p>
+
+        <p>LAST NAME : {{ member.lastName }}</p>
+
+        <p>EMAIL : {{ member.email }}</p>
+
+        <p><a href="{{ path('member_list') }}" class="btn btn-primary">Back</a></p>
+    </div>
+{% endblock %}

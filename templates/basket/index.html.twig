@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre panier{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Votre panier</h1>
+
+        {% for order in basket.orders %}
+            <p>
+                {{ order.product.name }} (quantité : {{ order.quantity }})
+                Prix total : {{ order.product.price * order.quantity }}€
+                <a href="{{ path('basket_add', {id: order.product.id}) }}" class="btn btn-success">
+                    Ajouter un
+                </a>
+                {% if order.quantity > 1 %}
+                    <a href="{{ path('basket_substract', {id: order.product.id}) }}" class="btn btn-warning">
+                        Enlever un
+                    </a>
+                {% endif %}
+                <a href="{{ path('basket_delete', {id: order.product.id}) }}" class="btn btn-danger">
+                    Supprimer du panier
+                </a>
+            </p>
+        {% endfor %}
+        {% if basket.orders | length < 1 %}
+            <p>Panier vide</p>
+        {% else %}
+            <h2>Prix du panier</h2>
+            <p>{{ basket.price }}€</p>
+
+            <p><a href="{{ path('basket_validate') }}" class="btn btn-secondary">Valider mon panier</a></p>
+        {% endif %}
+    </div>
+{% endblock %}

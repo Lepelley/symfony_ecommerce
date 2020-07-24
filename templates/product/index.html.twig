@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+    <div class="row my-4">
+        <nav class="col">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ path('home') }}" class="text-light">
+                        <span class="fas fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ path('category_show', {slug: category.slug}) }}" class="text-light">
+                        {{ category.name }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item active">{{ product.name }}</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row my-4">
+        <div class="col">
+            <h1 class="mb-4">{{ product.name }}</h1>
+            <div class="row">
+                <div class="col mb-5">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img src="{{ asset('uploads/pictures/' ~ product.picture) }}" class="img-fluid" alt="">
+                        </div>
+                        <div class="col-sm-8">
+                            <p class="my-1">{{ product.content }}</p>
+                            <p class="h5 my-2">{{ product.price }}€</p>
+                            {% if product.inStock %}
+                            <p class="my-2 text-success">In stock</p>
+                                <p>
+                                    <a href="{{ path('basket_add', {id: product.id}) }}" class="btn btn-success">
+                                        Ajouter au panier
+                                    </a>
+                                </p>
+                            {% else %}
+                            <p class="my-2 text-danger">Not in stock</p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
